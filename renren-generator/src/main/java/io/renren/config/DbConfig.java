@@ -24,7 +24,6 @@ import org.springframework.context.annotation.Primary;
  */
 @Configuration
 public class DbConfig {
-    private static boolean mongo = false;
     @Value("${renren.database: mysql}")
     private String database;
     @Autowired
@@ -36,9 +35,7 @@ public class DbConfig {
     @Autowired
     private PostgreSQLGeneratorDao postgreSQLGeneratorDao;
 
-    public static boolean isMongo() {
-        return mongo;
-    }
+    private static boolean mongo = false;
 
     @Bean
     @Primary
@@ -63,6 +60,10 @@ public class DbConfig {
     public GeneratorDao getMongoDBDao(MongoDBGeneratorDao mongoDBGeneratorDao) {
         mongo = true;
         return mongoDBGeneratorDao;
+    }
+
+    public static boolean isMongo() {
+        return mongo;
     }
 
 }

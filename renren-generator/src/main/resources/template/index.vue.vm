@@ -57,9 +57,8 @@
 </template>
 
 <script>
-    import AddOrUpdate from './'
-
-    export default {
+  import AddOrUpdate from './${pathName}-add-or-update'
+  export default {
     data () {
       return {
         dataForm: {
@@ -131,7 +130,7 @@
           return item.${pk.attrname}
         })
         #[[this.$confirm(`确定对[id=${ids.join(',')}]进行[${id ? '删除' : '批量删除'}]操作?`, '提示', {]]#
-          '确定',
+          confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
@@ -142,7 +141,7 @@
           }).then(({data}) => {
             if (data && data.code === 0) {
               #[[this.$message({]]#
-                '操作成功',
+                message: '操作成功',
                 type: 'success',
                 duration: 1500,
                 onClose: () => {
